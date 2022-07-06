@@ -1,13 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import { DarkModeContextProvider } from "./context/darkModeContext";
+import React from "react"
+import ReactDOM from "react-dom"
+import { Provider } from "react-redux"
+import App from "./App"
+import "bootstrap/dist/css/bootstrap.min.css"
+import Store from "./Store"
 
 ReactDOM.render(
   <React.StrictMode>
-    <DarkModeContextProvider>
+    <Provider store={Store}>
       <App />
-    </DarkModeContextProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
-);
+)
