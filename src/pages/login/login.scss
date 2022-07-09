@@ -1,6 +1,6 @@
 .login {
   height: 100vh;
-  background: var(--background);
+  background: #231f20;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -127,7 +127,7 @@
 }
 
 .login-btn {
-  background-color: var(--secondaryColor);
+  background-color: #eeb953;
   color: #fff;
   border-radius: 5px;
   border: none;
@@ -144,8 +144,8 @@
 .reg-btn {
   border-radius: 5px;
   text-align: center;
-  color: var(--secondaryColor);
-  border: 1px solid var(--secondaryColor);
+  color: #eeb953;
+  border: 1px solid #eeb953;
   margin-top: 2rem;
 
   &:hover {
@@ -158,7 +158,7 @@
 .forgot-btn {
   background: transparent;
   text-align: center;
-  color: var(--secondaryColor);
+  color: #eeb953;
   text-decoration: underline;
   font-size: 16px;
   margin-top: 1rem;
@@ -172,7 +172,7 @@
   position: absolute;
   width: 8rem;
   height: 8rem;
-  background: var(--secondaryColor);
+  background: #eeb953;
   border-radius: 50% !important;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;

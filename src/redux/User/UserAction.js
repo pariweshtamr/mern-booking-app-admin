@@ -7,9 +7,9 @@ export const userLogin = (loginInfo) => async (dispatch) => {
   // CALL API TO LOGIN
   const data = await loginUser(loginInfo)
 
-  if (data?.status === "success") {
-    return dispatch(loginSuccess(data))
+  if (data?.isAdmin) {
+    return dispatch(loginSuccess(data.details))
   }
 
-  dispatch(loginFail(data))
+  dispatch(loginFail({ message: "You are not allowed!" }))
 }
