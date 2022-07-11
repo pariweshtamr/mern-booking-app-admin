@@ -7,13 +7,13 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { productInputs, userInputs } from "./formSource"
 import "./style/dark.scss"
 import { useSelector } from "react-redux"
+import { hotelColumns, userColumns } from "./datatablesource"
 
 function App() {
   const { darkMode } = useSelector((state) => state.darkMode)
+  const { user } = useSelector((state) => state.user)
 
   const ProtectedRoute = ({ children }) => {
-    const { user, isLoggedIn } = useSelector((state) => state.user)
-
     if (!user) {
       return <Navigate to="/login" />
     }
@@ -26,7 +26,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/">
-            <Route path="login" element={<Login />} />ß
             <Route
               index
               element={
@@ -35,12 +34,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="login" element={<Login />} />
+
             <Route path="users">
               <Route
                 index
                 element={
                   <ProtectedRoute>
-                    <List />
+                    <List columns={userColumns} />
                   </ProtectedRoute>
                 }
               />
@@ -61,17 +62,18 @@ function App() {
                 }
               />
             </Route>
-            <Route path="products">
+
+            <Route path="hotels">
               <Route
                 index
                 element={
                   <ProtectedRoute>
-                    <List />
+                    <List columns={hotelColumns} />
                   </ProtectedRoute>
                 }
               />
               <Route
-                path=":productId"
+                path=":hotelId"
                 element={
                   <ProtectedRoute>
                     <Single />
@@ -82,7 +84,7 @@ function App() {
                 path="new"
                 element={
                   <ProtectedRoute>
-                    <New inputs={productInputs} title="Add New Product" />{" "}
+                    <New inputs={productInputs} title="Add New Hotel" />{" "}
                   </ProtectedRoute>
                 }
               />

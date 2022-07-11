@@ -1,16 +1,16 @@
-import "./widget.scss";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import "./widget.scss"
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined"
+import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined"
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined"
+import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined"
 
 const Widget = ({ type }) => {
-  let data;
+  let data
 
   //temporary
-  const amount = 100;
-  const diff = 20;
+  const amount = 100
+  const diff = 20
 
   switch (type) {
     case "user":
@@ -27,8 +27,8 @@ const Widget = ({ type }) => {
             }}
           />
         ),
-      };
-      break;
+      }
+      break
     case "order":
       data = {
         title: "ORDERS",
@@ -43,8 +43,8 @@ const Widget = ({ type }) => {
             }}
           />
         ),
-      };
-      break;
+      }
+      break
     case "earning":
       data = {
         title: "EARNINGS",
@@ -56,8 +56,8 @@ const Widget = ({ type }) => {
             style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
           />
         ),
-      };
-      break;
+      }
+      break
     case "balance":
       data = {
         title: "BALANCE",
@@ -72,10 +72,10 @@ const Widget = ({ type }) => {
             }}
           />
         ),
-      };
-      break;
+      }
+      break
     default:
-      break;
+      break
   }
 
   return (
@@ -83,7 +83,8 @@ const Widget = ({ type }) => {
       <div className="left">
         <span className="title">{data.title}</span>
         <span className="counter">
-          {data.isMoney && "$"} {amount}
+          {data.isMoney && "$"}
+          {amount}
         </span>
         <span className="link">{data.link}</span>
       </div>
@@ -95,7 +96,7 @@ const Widget = ({ type }) => {
         {data.icon}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Widget;
+export default Widget
