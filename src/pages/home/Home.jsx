@@ -1,10 +1,10 @@
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
-import "./home.scss";
-import Widget from "../../components/widget/Widget";
-import Featured from "../../components/featured/Featured";
-import Chart from "../../components/chart/Chart";
-import Table from "../../components/table/Table";
+import Sidebar from "../../components/sidebar/Sidebar"
+import Navbar from "../../components/navbar/Navbar"
+import "./home.scss"
+import Widget from "../../components/widget/Widget"
+import Featured from "../../components/featured/Featured"
+import Chart from "../../components/chart/Chart"
+import Table from "../../components/table/Table"
 
 const Home = () => {
   return (
@@ -14,7 +14,7 @@ const Home = () => {
         <Navbar />
         <div className="widgets">
           <Widget type="user" />
-          <Widget type="order" />
+          <Widget type="booking" />
           <Widget type="earning" />
           <Widget type="balance" />
         </div>
@@ -28,7 +28,7 @@ const Home = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

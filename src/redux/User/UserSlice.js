@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-  user: JSON.parse(localStorage.getItem("user"))
-    ? JSON.parse(localStorage.getItem("user"))
-    : {},
+  user: {},
   isLoggedIn: false,
   isLoading: false,
   error: null,
@@ -33,12 +31,23 @@ const userSlice = createSlice({
       state.user = {}
       state.isLoading = false
       state.error = false
+
+      localStorage.clear()
+    },
+    loginAuto: (state) => {
+      state.isLoggedIn = true
     },
   },
 })
 
 const { reducer, actions } = userSlice
 
-export const { respondPending, loginSuccess, loginFail } = actions
+export const {
+  respondPending,
+  loginSuccess,
+  logoutSuccess,
+  loginFail,
+  loginAuto,
+} = actions
 
 export default reducer

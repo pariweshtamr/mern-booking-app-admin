@@ -3,29 +3,31 @@ import Login from "./pages/login/Login"
 import List from "./pages/list/List"
 import Single from "./pages/single/Single"
 import New from "./pages/new/New"
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom"
 import { productInputs, userInputs } from "./formSource"
 import "./style/dark.scss"
 import { useSelector } from "react-redux"
 import { hotelColumns, userColumns } from "./datatablesource"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+import ProtectedRoute from "./components/protectedRoute/ProtectedRoute"
 
 function App() {
   const { darkMode } = useSelector((state) => state.darkMode)
-  const { user } = useSelector((state) => state.user)
-
-  const ProtectedRoute = ({ children }) => {
-    if (!user) {
-      return <Navigate to="/login" />
-    }
-
-    return children
-  }
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
+        <ToastContainer autoClose={2000} />
         <Routes>
-          <Route path="/">
+          <Route exact path="/">
+            <Route path="login" element={<Login />} />
             <Route
               index
               element={
@@ -34,7 +36,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="login" element={<Login />} />
 
             <Route path="users">
               <Route
@@ -53,6 +54,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+
               <Route
                 path="new"
                 element={

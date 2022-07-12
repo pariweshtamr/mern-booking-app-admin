@@ -8,14 +8,13 @@ import { useEffect } from "react"
 import axios from "axios"
 
 const Datatable = ({ columns }) => {
+  const [list, setList] = useState([])
   const location = useLocation()
   const path = location.pathname.split("/")[1]
   const pathApi =
     process.env.NODE_ENV === "production"
       ? `/api/${path}`
       : `http://localhost:8000/api/${path}`
-
-  const [list, setList] = useState()
 
   const { data, loading, error } = useFetch(pathApi)
 
@@ -24,11 +23,16 @@ const Datatable = ({ columns }) => {
   }, [data])
 
   const handleDelete = async (id) => {
-    console.log(id)
     try {
-      await axios.delete(pathApi + `/${id}`)
-      setList(list.filter((item) => item._id === id))
-    } catch (error) {}
+      await axios.delete(pathApi + `/${id}`, {
+        headers: {
+          authorization: window.sessionStorage.getItem("accessJWT"),
+        },
+      })
+      setList(list.filter((item) => item._id !== id))
+    } catch (error) {
+      console.log(error.message)
+    }
   }
 
   const actionColumn = [

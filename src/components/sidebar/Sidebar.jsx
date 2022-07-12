@@ -14,9 +14,14 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { dark, light } from "../../redux/DarkMode/DarkModeSlice"
+import { userLogout } from "../../redux/User/UserAction"
 
 const Sidebar = () => {
   const dispatch = useDispatch()
+
+  const handleClick = () => {
+    dispatch(userLogout())
+  }
 
   return (
     <div className="sidebar">
@@ -86,7 +91,7 @@ const Sidebar = () => {
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li>
-          <li>
+          <li onClick={handleClick}>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>

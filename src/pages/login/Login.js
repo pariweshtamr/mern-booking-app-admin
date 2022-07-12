@@ -1,17 +1,19 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Container } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { userLogin } from "../../redux/User/UserAction"
 import "./login.scss"
 
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
   const uRef = useRef()
   const passRef = useRef()
-  const { isLoading, error } = useSelector((state) => state.user)
+  const { isLoading, error, isLoggedIn } = useSelector((state) => state.user)
   const [show, setShow] = useState(false)
+  const from = location?.state?.from?.pathname || "/"
 
   const handleOnClick = async (e) => {
     e.preventDefault()
@@ -21,6 +23,10 @@ const Login = () => {
 
     dispatch(userLogin({ username, password })) && navigate("/")
   }
+
+  useEffect(() => {
+    isLoggedIn && navigate(from)
+  }, [isLoggedIn, navigate, from])
 
   return (
     <div className="login">

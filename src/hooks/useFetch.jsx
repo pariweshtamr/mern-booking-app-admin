@@ -11,7 +11,11 @@ const useFetch = (url) => {
     const fetchData = async () => {
       setLoading(true)
       try {
-        const res = await axios.get(url)
+        const res = await axios.get(url, {
+          headers: {
+            authorization: window.sessionStorage.getItem("accessJWT"),
+          },
+        })
         setData(res.data)
       } catch (error) {
         setError(error)
