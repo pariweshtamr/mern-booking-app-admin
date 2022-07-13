@@ -17,7 +17,7 @@ const Login = () => {
 
   const handleOnClick = async (e) => {
     e.preventDefault()
-
+    console.log("sadsd")
     const username = uRef.current?.value
     const password = passRef.current?.value
 
@@ -77,7 +77,7 @@ const Login = () => {
               </button>
             </div>
             <button
-              disabled={isLoading}
+              // disabled={isLoading}
               className="bttn login-btn"
               onClick={handleOnClick}
             >

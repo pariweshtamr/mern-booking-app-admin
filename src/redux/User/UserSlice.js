@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-  user: {},
+  user: JSON.parse(localStorage.getItem("user")) || {},
   isLoggedIn: false,
   isLoading: false,
+  autoLoginLoading: false,
   error: null,
 }
 
@@ -15,7 +16,7 @@ const userSlice = createSlice({
       state.isLoading = true
     },
     loginSuccess: (state, { payload }) => {
-      state.user = payload
+      state.user = payload || {}
       state.isLoggedIn = true
       state.isLoading = false
       state.error = null
@@ -34,7 +35,11 @@ const userSlice = createSlice({
 
       localStorage.clear()
     },
+    autoLoginPending: (state, { payload }) => {
+      state.autoLoginLoading = payload
+    },
     loginAuto: (state) => {
+      state.autoLoginLoading = false
       state.isLoggedIn = true
     },
   },
@@ -48,6 +53,7 @@ export const {
   logoutSuccess,
   loginFail,
   loginAuto,
+  autoLoginPending,
 } = actions
 
 export default reducer

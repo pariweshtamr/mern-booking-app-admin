@@ -1,11 +1,12 @@
 import "./datatable.scss"
 import { DataGrid } from "@mui/x-data-grid"
-import { userColumns, userRows } from "../../datatablesource"
 import { Link, useLocation } from "react-router-dom"
 import { useState } from "react"
 import useFetch from "../../hooks/useFetch"
 import { useEffect } from "react"
 import axios from "axios"
+import LoadingBox from "../loadingBox/LoadingBox"
+import { Alert } from "react-bootstrap"
 
 const Datatable = ({ columns }) => {
   const [list, setList] = useState([])
@@ -24,12 +25,14 @@ const Datatable = ({ columns }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(pathApi + `/${id}`, {
-        headers: {
-          authorization: window.sessionStorage.getItem("accessJWT"),
-        },
-      })
-      setList(list.filter((item) => item._id !== id))
+      if (window.confirm("Are you sure you want to delete this user?")) {
+        await axios.delete(pathApi + `/${id}`, {
+          headers: {
+            authorization: window.sessionStorage.getItem("accessJWT"),
+          },
+        })
+        setList(list.filter((item) => item._id !== id))
+      }
     } catch (error) {
       console.log(error.message)
     }
@@ -65,9 +68,11 @@ const Datatable = ({ columns }) => {
           Add New
         </Link>
       </div>
+      {loading && <LoadingBox />}
+      {error && <Alert variant="danger">{error}</Alert>}
       <DataGrid
         className="datagrid"
-        rows={data}
+        rows={list}
         columns={columns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}

@@ -3,23 +3,26 @@ import Login from "./pages/login/Login"
 import List from "./pages/list/List"
 import Single from "./pages/single/Single"
 import New from "./pages/new/New"
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-  useLocation,
-} from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { productInputs, userInputs } from "./formSource"
 import "./style/dark.scss"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { hotelColumns, userColumns } from "./datatablesource"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import ProtectedRoute from "./components/protectedRoute/ProtectedRoute"
+import { useEffect } from "react"
+import { autoLogin } from "./redux/User/UserAction"
 
 function App() {
+  const { user, isLoggedIn } = useSelector((state) => state.user)
   const { darkMode } = useSelector((state) => state.darkMode)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    console.log(user, isLoggedIn)
+    user && dispatch(autoLogin())
+  }, [user, isLoggedIn, dispatch])
 
   return (
     <div className={darkMode ? "app dark" : "app"}>

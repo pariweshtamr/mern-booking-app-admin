@@ -8,11 +8,14 @@ import {
   ChatBubbleOutlineOutlined,
   ListOutlined,
 } from "@mui/icons-material"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { toggle } from "../../redux/DarkMode/DarkModeSlice"
 
 const Navbar = () => {
   const { dispatch } = useDispatch()
+  const { user } = useSelector((state) => state.user)
+
+  console.log(user)
 
   return (
     <div className="navbar">
@@ -23,29 +26,23 @@ const Navbar = () => {
         </div>
         <div className="items">
           <div className="item">
-            <LanguageOutlined className="icon" />
-            English
-          </div>
-          <div className="item">
             <DarkModeOutlined
               className="icon"
               style={{ cursor: "pointer" }}
               onClick={() => dispatch(toggle())}
             />
           </div>
-          <div className="item">
-            <FullscreenExitOutlined className="icon" />
-          </div>
+
           <div className="item">
             <NotificationsNoneOutlined className="icon" />
             <div className="counter">1</div>
           </div>
-          <div className="item">
-            <ListOutlined className="icon" />
-          </div>
+
           <div className="item">
             <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              src={
+                user?.img ? user?.img : "https://i.ibb.co/MBtjqXQ/no-avatar.gif"
+              }
               alt=""
               className="avatar"
             />
