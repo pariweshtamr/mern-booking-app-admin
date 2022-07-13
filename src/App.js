@@ -2,17 +2,20 @@ import Home from "./pages/home/Home"
 import Login from "./pages/login/Login"
 import List from "./pages/list/List"
 import Single from "./pages/single/Single"
-import New from "./pages/new/New"
+import New from "./pages/newUser/NewUser"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { productInputs, userInputs } from "./formSource"
+import { hotelInputs, roomInputs, userInputs } from "./formSource"
 import "./style/dark.scss"
 import { useDispatch, useSelector } from "react-redux"
-import { hotelColumns, userColumns } from "./datatablesource"
+import { hotelColumns, roomColumns, userColumns } from "./datatablesource"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import ProtectedRoute from "./components/protectedRoute/ProtectedRoute"
 import { useEffect } from "react"
 import { autoLogin } from "./redux/User/UserAction"
+import NewUser from "./pages/newUser/NewUser"
+import NewHotel from "./pages/newHotel/NewHotel"
+import NewRoom from "./pages/newRoom/NewRoom"
 
 function App() {
   const { user, isLoggedIn } = useSelector((state) => state.user)
@@ -62,7 +65,7 @@ function App() {
                 path="new"
                 element={
                   <ProtectedRoute>
-                    <New inputs={userInputs} title="Add New User" />{" "}
+                    <NewUser inputs={userInputs} title="Add New User" />{" "}
                   </ProtectedRoute>
                 }
               />
@@ -89,7 +92,34 @@ function App() {
                 path="new"
                 element={
                   <ProtectedRoute>
-                    <New inputs={productInputs} title="Add New Hotel" />{" "}
+                    <NewHotel inputs={hotelInputs} title="Add New Hotel" />{" "}
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
+
+            <Route path="rooms">
+              <Route
+                index
+                element={
+                  <ProtectedRoute>
+                    <List columns={roomColumns} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path=":roomId"
+                element={
+                  <ProtectedRoute>
+                    <Single />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="new"
+                element={
+                  <ProtectedRoute>
+                    <NewRoom inputs={roomInputs} title="Add New Hotel" />{" "}
                   </ProtectedRoute>
                 }
               />
