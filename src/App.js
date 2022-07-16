@@ -23,7 +23,6 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log(user, isLoggedIn)
     user && dispatch(autoLogin())
   }, [user, isLoggedIn, dispatch])
 

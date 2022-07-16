@@ -1,12 +1,8 @@
 import "./navbar.scss"
 import {
   SearchOutlined,
-  LanguageOutlined,
   DarkModeOutlined,
-  FullscreenExitOutlined,
   NotificationsNoneOutlined,
-  ChatBubbleOutlineOutlined,
-  ListOutlined,
 } from "@mui/icons-material"
 import { useDispatch, useSelector } from "react-redux"
 import { toggle } from "../../redux/DarkMode/DarkModeSlice"
@@ -14,8 +10,6 @@ import { toggle } from "../../redux/DarkMode/DarkModeSlice"
 const Navbar = () => {
   const { dispatch } = useDispatch()
   const { user } = useSelector((state) => state.user)
-
-  console.log(user)
 
   return (
     <div className="navbar">

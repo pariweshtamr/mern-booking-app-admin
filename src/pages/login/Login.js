@@ -17,7 +17,6 @@ const Login = () => {
 
   const handleOnClick = async (e) => {
     e.preventDefault()
-    console.log("sadsd")
     const username = uRef.current?.value
     const password = passRef.current?.value
 

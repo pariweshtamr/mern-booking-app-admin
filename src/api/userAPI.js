@@ -26,3 +26,14 @@ export const logoutUser = async (tokens) => {
     }
   }
 }
+
+export const registerUser = async (newUser) => {
+  try {
+    const { data } = await axios.post(userApi + "/register", newUser)
+    console.log(data)
+
+    return data
+  } catch (error) {
+    return error.response.data
+  }
+}
