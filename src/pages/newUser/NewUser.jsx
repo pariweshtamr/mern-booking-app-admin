@@ -10,8 +10,12 @@ const NewUser = ({ inputs, title }) => {
   const [file, setFile] = useState("")
   const [info, setInfo] = useState({})
 
-  const handleChange = (e) => {
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }))
+  const handleOnChange = (e) => {
+    const { name, value } = e.target
+    setInfo({
+      ...info,
+      [name]: value,
+    })
   }
 
   const handleOnClick = async (e) => {
@@ -71,17 +75,43 @@ const NewUser = ({ inputs, title }) => {
                 />
               </div>
 
-              {inputs.map((input) => (
-                <div className="formInput" key={input.id}>
-                  <label>{input.label}</label>
-                  <input
-                    onChange={handleChange}
-                    type={input.type}
-                    placeholder={input.placeholder}
-                    id={input.id}
-                  />
-                </div>
-              ))}
+              <div className="formInput">
+                <label>Username</label>
+                <input type="text" onChange={handleOnChange} name="username" />
+              </div>
+              <div className="formInput">
+                <label>Full Name</label>
+                <input type="text" onChange={handleOnChange} name="fullName" />
+              </div>
+              <div className="formInput">
+                <label>Email</label>
+                <input type="mail" onChange={handleOnChange} name="email" />
+              </div>
+              <div className="formInput">
+                <label>Phone</label>
+                <input type="text" onChange={handleOnChange} name="phone" />
+              </div>
+              <div className="formInput">
+                <label>Password</label>
+                <input
+                  type="password"
+                  onChange={handleOnChange}
+                  name="password"
+                />
+              </div>
+              <div className="formInput">
+                <label>Address</label>
+                <input type="text" onChange={handleOnChange} name="address" />
+              </div>
+              <div className="formInput">
+                <label>City</label>
+                <input type="text" onChange={handleOnChange} name="city" />
+              </div>
+              <div className="formInput">
+                <label>Country</label>
+                <input type="text" onChange={handleOnChange} name="country" />
+              </div>
+
               <button onClick={handleOnClick}>Send</button>
             </form>
           </div>
